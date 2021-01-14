@@ -4,7 +4,7 @@
 
 @section('content')
 <div id='app'>
+<ca-component></ca-component>
 
-Ola Mundo
 </div>
 @stop

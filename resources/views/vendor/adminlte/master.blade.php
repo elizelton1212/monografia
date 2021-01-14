@@ -17,6 +17,7 @@
         @yield('title_prefix', config('adminlte.title_prefix', ''))
         @yield('title', config('adminlte.title', 'AdminLTE 3'))
         @yield('title_postfix', config('adminlte.title_postfix', ''))
+
     </title>
 
     {{-- Custom stylesheets (pre AdminLTE) --}}
@@ -61,6 +62,7 @@
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
     @endif
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
 </head>
 

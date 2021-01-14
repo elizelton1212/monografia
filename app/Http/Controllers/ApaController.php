@@ -3,204 +3,256 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+use App\Models\Municipio;
+use App\Models\Provincia;
 use App\Models\Apa;
 use App\Models\Localizacao;
 class ApaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //
 
-     private $apa;
-     private $localizacao;
+    private $municipio;
+    private $provincia;
 
-     public function __construct()
-     {
-        $this->middleware('auth');
+ public function __construct(){
 
-        $this->apa=new Apa();
-        $this->localizacao=new Localizacao();
-     }
-
-    public function index()
-    {
-        //
-        $apas = $this->apa->paginate(15);;
-        return view('apa.index',compact('apas'));
-        
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+   $this->municipio= new Municipio();
+   $this->provincia= new Provincia();
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+public function index(){
+
+}
+
+
+
+/*
+Consultar a provicia para retornar o codigo para cadastrar na Localizacao
+*/
+
+public function ConsultarProvinciaID($provincia)
+{
+    # code...
+    $t;
+    $provincias = Provincia::where('nome',$provincia)->get();
+
+    foreach ($provincias as $p) {
+          # code...
+        $t = $p->id;
+
+      }
+
+        return $t; 
+
+
+}
+
+
+
+
+/*
+Consultar a municipio para retornar o codigo para cadastrar na Localizacao
+*/
+
+public function ConsultarMunicipioID($municipio)
+{
+    # code...
+    $t;
+    $provincias = Municipio::where('nome',$municipio)->get();
+
+    foreach ($provincias as $p) {
+          # code...
+        $t = $p->id;
+
+      }
+
+        return $t; 
+
+
+}
+
+
+
+
+
+/*
+
+Funcao que renderiza a view para o cadastro de Apas
+
+
+*/
+public function cadastrarApa(){
+    	return view('apa.cadastrar');
+    }
+
+
+    public function store($request)
     {
-        
-    //Instruçáo para cadastrar a localização com os dados que vêm do formulario da modal cadastrar Apa
+        //
 
-    $localizacao = $this->localizacao->create([
-        
-        'provincia'=>$request->provincia,
-        'municipio'=>$request->municipio,
-        'districto'=>$request->districto,
-        'bairro'=>$request->bairro,
-        'rua'=>$request->rua,
-        'numero_da_casa'=>$request->numero_da_casa,
+        $provincia_id =$this->ConsultarProvinciaID($request['provincia']);
+        $municipio_id =$this->ConsultarMunicipioID($request['municipio']);
+$insert = Localizacao::create([
+
+            'provincia_id'=>$provincia_id,
+            'municipio_id'=>$municipio_id,
+            'districto_id'=>$request['districto'],
+            'comuna_id'=>$request['comuna'],
+            'bairro'=>$request['bairro'],
+            'rua'=>$request['rua'],
+            'ncasa'=>$request['ncasa']
+            ]);
 
 
-    ]);
+if ($insert) {
+        return $insert->id; 
+     
+}
 
-    // se a localização for feita com sucesso então faz o cadastro da Apa        
-    
-    if($localizacao){
+    }
 
-        //Instruçáo para cadastrar a apa com os dados que vêm do formulario da modal cadastrar Apa
 
-    $insertapa = $this->apa->create([
-        
-        'nome'=>$request->nome,
-        'email'=>$request->email,
-        'telefone'=>$request->nome,
-        /*
-         O campo localização sera preenchido com o 
-         retorno do cadastro da localização acessando o campo id*/
 
-        'localizacao_i'=>$localizacao->id
 
-        ]);
+/*cadastrar Apa*/
 
-        if($insertapa){
-            echo 'Dados Cadastrados com sucesso';
-        }else{
-            echo 'Erro ao Cadastrar os Dados';
+public function storeApa(Request $request)
+    {
+    	# code...
+
+    	$localizacao['provincia'] = $request->provincia;
+    	$localizacao['municipio'] = $request->municipio;
+    	$localizacao['districto'] = $request->districto;
+    	$localizacao['comuna'] = $request->comuna;
+    	$localizacao['bairro'] = $request->bairro;
+    	$localizacao['rua'] = $request->rua;
+    	$localizacao['ncasa'] = $request->ncasa;
+    	$localizacao_id = $this->store($localizacao);
+
+
+
+
+
+    	$insert = Apa::create([
+
+		'nome'=>$request->nome,
+		'email'=>$request->email,
+		'telefone'=>$request->telefone,
+		'facebook'=>$request->facebook,
+		'responsavel'=>$request->responsavel,
+		'localizacao_id'=>$localizacao_id
+
+    		]);
+
+
+ 
+
+
+
+    	if ($insert) {
+    		# code...
+
+    		$retorno = "Associação Cadastrada Com Sucesso";
+
+        return response()->json($retorno); 
+
+
+    	}else{
+
+    		$retorno = "Erro ao Cadastrar a Associação";
+
+        return response()->json($retorno); 
+
+    	}
+
+    }    
+
+
+
+/*
+
+Funcao que retorna os municipios da provincia selecionada
+
+*/
+
+public function Provincias_Municipios($provincia){
+
+
+  $provincia_id = $this->provincia->where('nome',$provincia)->get();
+
+        $t;
+
+        foreach ($provincia_id as $x) {
+            # code...
+
+            $t = $x->id;
         }
-    
-    }
-    
-    
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-        $apas = $this->apa->find($id);
-        return view('apa.show',compact('apas'));
-    
-    }
+        $municipios = $this->provincia->find($t)->ProvinciaMunicipio;
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-        $apas = $this->apa->find($id);
-        return view('apa.edit',compact('apas'));
-    
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
-        //
-
-            
-    //Instruçáo para actualizar a localização com os dados que vêm do formulario da modal cadastrar Apa
-
-    $localizacao = $this->localizacao->where('id',$request->localizacao_id)->update([
-        
-        'provincia'=>$request->provincia,
-        'municipio'=>$request->municipio,
-        'districto'=>$request->districto,
-        'bairro'=>$request->bairro,
-        'rua'=>$request->rua,
-        'numero_da_casa'=>$request->numero_da_casa,
+        return response()->json($municipios); 
 
 
-    ])->get();
-
-    // se a localização for feita com sucesso então faz o cadastro da Apa        
-    
-    if($localizacao){
-
-        //Instruçáo para atualizar a apa com os dados que vêm do formulario da modal cadastrar Apa
-
-    $insertapa = $this->apa->where('id',$request->apa_id)->update([
-        
-        'nome'=>$request->nome,
-        'email'=>$request->email,
-        'telefone'=>$request->nome,
-        /*
-         O campo localização sera preenchido com o 
-         retorno do cadastro da localização acessando o campo id*/
-
-        'localizacao_i'=>$localizacao->id
-
-        ]);
-
-        if($insertapa){
-            echo 'Dados Alterados com sucesso';
-        }else{
-            echo 'Erro ao Alterar os Dados';
-        }
-    
-    }
-    
-        
-        
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-        $pagar = $this->apa->destroy($id);
-    }
+    /*
 
-    public function procurar(Request $request)
-    {
-    
-    $apas = $this->apa->where('id',$request->apa_id)->get();
+Funcao que retorna todas as comunas mediante ao seu municipio
 
-        return view('apa.consulta',compact('apas'));
-    }
+
+*/
+public function MunicipioComuna($municipio)
+{
+	# code...
+
+$municipio_id = $this->municipio->where('nome',$municipio)->get();
+
+foreach ($municipio_id as $m) {
+	# code...
+
+
+	$t = $m->id;
+}
+
+$comunas = $this->municipio->find($t)->MunicipioComuna;
+
+ return response()->json($comunas);
+
+
+}
+
+
+
+/*
+
+Funcao que retorna todos os districtos de um determinado municipio
+
+
+*/
+
+
+public function MunicipioDistricto($municipio){
+
+
+$municipio_id = $this->municipio->where('nome',$municipio)->get();
+
+
+foreach ($municipio_id as $m) {
+	# code...
+
+
+	$t = $m->id;
+}
+
+$districtos = $this->municipio->find($t)->MunicipioDistricto;
+
+ return response()->json($districtos);
+
+
+}
 
 
 }

@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'logo' => '<b>OL</b>impia',
+    'logo' => '<b>OL</b>IMPIA',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -64,8 +64,8 @@ return [
     |
     */
 
-    'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_enabled' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
     'usermenu_image' => false,
     'usermenu_desc' => false,
@@ -84,7 +84,7 @@ return [
     */
 
     'layout_topnav' => null,
-    'layout_boxed' => true,
+    'layout_boxed' => null,
     'layout_fixed_sidebar' => null,
     'layout_fixed_navbar' => null,
     'layout_fixed_footer' => null,
@@ -102,7 +102,7 @@ return [
     */
 
     'classes_auth_card' => 'card-outline card-primary',
-    'classes_auth_header' => '',
+    'classes_auth_header' => 'true',
     'classes_auth_body' => '',
     'classes_auth_footer' => '',
     'classes_auth_icon' => '',
@@ -121,14 +121,14 @@ return [
     */
 
     'classes_body' => '',
-    'classes_brand' => '',
+    'classes_brand' => 'brand-link',
     'classes_brand_text' => '',
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
     'classes_sidebar' => 'sidebar-dark-primary elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
+    'classes_topnav' => 'navbar-blue navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
@@ -168,7 +168,7 @@ return [
 
     'right_sidebar' => false,
     'right_sidebar_icon' => 'fas fa-cogs',
-    'right_sidebar_theme' => 'dark',
+    'right_sidebar_theme' => 'blue',
     'right_sidebar_slide' => true,
     'right_sidebar_push' => true,
     'right_sidebar_scrollbar_theme' => 'os-theme-light',
@@ -233,15 +233,137 @@ return [
     'menu' => [
         [
             'text'    => 'Associações',
-            'icon'    => 'fas fa-fw fa-share',
+            'icon'    => 'fas fa-university',
+            'submenu' => [
+                  
+             [
+                    'text' => 'Geral',
+                    'icon' =>'fas fa-cog',
+                    'url'  => '#',
+                ],
+
+                [
+                    'text' => 'Cadastrar',
+                    'icon' =>'fas fa-plus',
+                    'url'  => 'cadastrarApa',
+                ],
+               
+                
+                [
+                    'text' => 'Jogadores',
+                    'url'  => '#',
+                ],
+
+                [
+                    'text' => 'Clubes',
+                    'url'  => '#',
+                ],
+
+                [
+                    'text' => 'Estatistica',
+                    'url'  => '#',
+                ],
+
+
+
+                
+            ],
+        ],
+      
+        [
+            'text'    => 'Concelho Disciplinar',
+            'icon'    => 'fas fa-school',
             'submenu' => [
                 [
                     'text' => 'Geral',
-                    'url'  => 'apa',
+                    'url'  => '#',
                 ],
                 
             ],
         ],
+
+        [
+            'text'    => 'Seleções',
+            'icon'    => 'fas fa-flag',
+            'submenu' => [
+                [
+                    'text' => 'Geral',
+                    'url'  => '#',
+                ],
+
+                
+                [
+                    'text'=>'Categorias',
+
+                    'submenu'=>[
+                    [
+                        'text' => 'Honra',
+                        'url'  => '#',
+                    ],
+                    [
+                        'text' => 'Sub-23',
+                        'url'  => '#',
+                    ],
+
+                    [
+                        'text' => 'Sub-20',
+                        'url'  => '#',
+                    ],
+
+                    [
+                        'text' => 'Sub-16',
+                        'url'  => '#',
+                    ],
+    
+    
+    
+    
+                
+                ],
+            ],
+                
+            ],
+        ],
+
+        [
+            'text'    => 'Campeonatos',
+            'icon'    => 'fas fa-trophy',
+            'submenu' => [
+                [
+                    'text' => 'Geral',
+                    'url'  => '#',
+                ],
+                
+            ],
+        ],
+        
+        [
+            'text'    => 'Estatisticas',
+            'icon'    => 'fas fa-chart-pie',
+            'submenu' => [
+                [
+                    'text' => 'Geral',
+                    'url'  => '#',
+                ],
+                
+            ],
+        ],
+        
+        
+        
+
+        [
+            'text'    => 'Federações',
+            'icon'    => '',
+            'submenu' => [
+                [
+                    'text' => 'Geral',
+                    'url'  => 'federacao',
+                ],
+                
+            ],
+        ],
+        
         
     ],
 

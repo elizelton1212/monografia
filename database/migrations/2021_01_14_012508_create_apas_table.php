@@ -18,6 +18,8 @@ class CreateApasTable extends Migration
             $table->string('nome');
             $table->string('email');
             $table->string('telefone');
+            $table->string('facebook')->nullable();
+            $table->string('responsavel');
             $table->bigInteger('localizacao_id')->unsigned();
             $table->foreign('localizacao_id')->references('id')->on('localizacaos')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

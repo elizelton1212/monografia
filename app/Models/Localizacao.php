@@ -8,21 +8,16 @@ class Localizacao extends Model
 {
     //
 protected $fillable = [
-    'provincia',
-    'municipio',
-    'districto',
-    'bairro',
-    'rua',
-    'numero_da_casa'
 
+	'provincia_id',
+	'municipio_id',
+	'districto_id',
+	'comuna_id',
+	'bairro',
+	'rua',
+	'ncasa'
 
 ];
- // Função que representa a relação entre a Localização e as Apas no Caso 1 para 1
-public function apa(Type $var = null)
-{
-    # code...
 
-    return $this->hasOne(\App\Apa);
-}
 
 }

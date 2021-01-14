@@ -5,6 +5,6 @@
 @section('content')
 <div id='app'>
 
-Ola Mundo
+<federacao-component></federacao-component>
 </div>
 @stop

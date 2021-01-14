@@ -28,4 +28,18 @@ Route::get('/home', function() {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('apa','ApaController');
+Route::post('cadastrarFederacao','FederacaoController@store');
+Route::get('federacoes','FederacaoController@show');
+Route::resource('federacao','FederacaoController');
+Route::get('procuraFederacao/{id}','FederacaoController@procuraFederacao');
+Route::post('editarFederacao','FederacaoController@edit');
+Route::delete('apagarFederacao/{id}','FederacaoController@apagarFederacao');
+Route::post('cadastrarApa','ApaController@store');
+Route::post('cadastrarLocalizacao','ApaController@cadastrarLocalizacao');
+Route::get('cadastrarApa','ApaController@cadastrarApa');
+Route::get('consultaProvincia','ProvinciaController@show');
+Route::any('consultarMunicipios/{provincia}','ApaController@Provincias_Municipios');
+Route::any('consultarDistricto/{municipio}','ApaController@MunicipioDistricto');
+Route::any('consultarComuna/{municipio}','ApaController@MunicipioComuna');
+//Route::post('registarLocalizacao','LocalizacaoController@store');
+Route::post('registarApa','ApaController@storeApa');
