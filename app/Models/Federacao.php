@@ -13,6 +13,7 @@ class Federacao extends Model
         'modalidade',
         'president',
         'telefone',
-        'email'
+        'email',
+        'imagem'
             ];
 }

@@ -47,6 +47,20 @@ $this->federacao =new Federacao();
     public function store(Request $request)
     {
         //
+
+
+$imagem= request()->file('imagem');
+
+
+
+
+$imagemNome=$imagem->getClientOriginalName();
+
+$imagemNome=time().'_'.$imagemNome;
+
+
+$imagem->move(public_path('/images'),$imagemNome);
+
 $insert = $this->federacao->create([
 
     'nome'=>$request->nome,
@@ -54,7 +68,8 @@ $insert = $this->federacao->create([
     'modalidade'=>$request->modalidade,
     'president'=>$request->president,
     'telefone'=>$request->telefone,
-    'email'=>$request->email
+    'email'=>$request->email,
+    'imagem'=>'images/'.$imagemNome,
     
 ]);
 
@@ -101,7 +116,8 @@ if($insert){
             'modalidade'=>$request->vermodalidade,
             'president'=>$request->verpresident,
             'telefone'=>$request->vertelefone,
-            'email'=>$request->veremail
+            'email'=>$request->veremail,
+            'imagem'=>$request->imagem,
 
 
         ]);
@@ -142,6 +158,20 @@ if($insert){
     public function procuraFederacao($id)
     {
         $fed = $this->federacao->find($id);
+        return response()->json($fed);
+
+    }
+
+    public function ConsultarFederacao()
+    {
+        return view('federacao.consultar');
+    }
+
+    public function consultarFederacao2(Request $request)
+    {
+        # code...
+
+           $fed = $this->federacao->all();
         return response()->json($fed);
 
     }

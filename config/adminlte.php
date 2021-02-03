@@ -357,13 +357,32 @@ return [
             'icon'    => '',
             'submenu' => [
                 [
-                    'text' => 'Geral',
+                    'text' => 'Cadastrar Federação',
                     'url'  => 'federacao',
+                ],
+                
+                [
+                    'text' => 'Consultar federações',
+                    'url'  => 'ConsultarFederacao',
                 ],
                 
             ],
         ],
         
+        [
+            'text'  =>'Administrativo',
+            'icon'  =>'fas fa-cog',
+            'submenu' =>[
+                [
+                'text' => 'Cadastrar Utilizador',
+                'icon' => 'fas fa-user',
+                'url' =>'CadastrarUser',
+                ],
+
+
+
+            ],
+        ],
         
     ],
 

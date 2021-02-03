@@ -21,6 +21,7 @@ class CreateFederacaosTable extends Migration
            $table->string("president");
            $table->integer("telefone"); 
            $table->string('email');
+           $table->string('imagem');
            $table->timestamps();
         });
     }

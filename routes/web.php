@@ -43,3 +43,15 @@ Route::any('consultarDistricto/{municipio}','ApaController@MunicipioDistricto');
 Route::any('consultarComuna/{municipio}','ApaController@MunicipioComuna');
 //Route::post('registarLocalizacao','LocalizacaoController@store');
 Route::post('registarApa','ApaController@storeApa');
+Route::get('ConsultarFederacao','FederacaoController@ConsultarFederacao');
+Route::resource('CadastrarUser','UserController');
+Route::any('ConsultarFederacao2','FederacaoController@consultarFederacao2');
+Route::post('cadastrarUser','UserController@store');
+Route::any('consultarPapeis','UserController@consultarPapel');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

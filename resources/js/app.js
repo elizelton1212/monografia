@@ -21,10 +21,12 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('federacao-component', require('./components/FederacaoComponent.vue').default);
-Vue.component('pagination',require('laravel-vue-pagination'));
+//Vue.component('pagination',require('laravel-vue-pagination'));
 Vue.component('localizacao-component', require('./components/LocalizacaoComponent.vue').default);
 Vue.component('cadastrarassociacao-component', require('./components/CadastrarAssociacaoComponent.vue').default);
 Vue.component('ca-component', require('./components/CAComponent.vue').default);
+Vue.component('cf-component', require('./components/ConsultarFederacaoComponent.vue').default);
+Vue.component('cus-component', require('./components/Administrativo/Sistema/CusfComponent.vue').default);
 
 
 /**
