@@ -11,6 +11,10 @@ class RoleUser extends Model
     	'role_id',
     	'user_id'
 
-
     ];
+
+      public function Permission()
+    {
+    return $this->belongsToMany(\App\Permission::class);
+    }
 }

@@ -237,9 +237,10 @@ return [
             'submenu' => [
                   
              [
-                    'text' => 'Geral',
+                    'text' => 'Cadastrar Adm Associacao',
+                    'can' => 'Administrar_a_Federacao',
                     'icon' =>'fas fa-cog',
-                    'url'  => '#',
+                    'url'  => 'cadastrarAdmAss',
                 ],
 
                 [
@@ -340,6 +341,7 @@ return [
         [
             'text'    => 'Estatisticas',
             'icon'    => 'fas fa-chart-pie',
+            'can'     =>  '',
             'submenu' => [
                 [
                     'text' => 'Geral',
@@ -358,6 +360,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Cadastrar Federação',
+                    'can'  =>  'administrador_de_Sistema',
                     'url'  => 'federacao',
                 ],
                 
@@ -372,9 +375,10 @@ return [
         [
             'text'  =>'Administrativo',
             'icon'  =>'fas fa-cog',
+            'can'  =>'administrar_o_Sistema',
             'submenu' =>[
                 [
-                'text' => 'Cadastrar Utilizador',
+                'text' => 'Cadastrar ADM Federação',
                 'icon' => 'fas fa-user',
                 'url' =>'CadastrarUser',
                 ],

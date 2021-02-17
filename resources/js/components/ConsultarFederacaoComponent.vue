@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-        <div class="row justify-content-left" >
-            <div class="row-md-1"v-for='(federacao, index ) in federacao.data' ::key="federacao.id">
+        <div class=" row justify-content-left" >
+            <div class="col-lg-3 col-sm-3 col-xs-3"v-for='(federacao, index ) in federacao.data' ::key="federacao.id">
                 <div class="card card-primary">
                     <div class="card-header">{{federacao.nome}}</div>
 

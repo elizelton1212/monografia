@@ -1982,6 +1982,7 @@ __webpack_require__.r(__webpack_exports__);
       data.append('imagem', this.imagem);
       data.append('funcao', this.funcao);
       data.append('federacao', this.federacao);
+      data.append('password', this.password);
       axios.post('cadastrarUser', data).the(function (response) {
         _this2.retornoCadastro = response.data;
       });
@@ -38606,7 +38607,7 @@ var render = function() {
                   _c(
                     "button",
                     { staticClass: "btn btn-danger", attrs: { type: "reset" } },
-                    [_vm._v("Limpar")]
+                    [_vm._v("LimparN")]
                   )
                 ])
               ],
@@ -40062,11 +40063,14 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c(
       "div",
-      { staticClass: "row justify-content-left" },
+      { staticClass: " row justify-content-left" },
       _vm._l(_vm.federacao.data, function(federacao, index) {
         return _c(
           "div",
-          { staticClass: "row-md-1", attrs: { ":key": federacao.id } },
+          {
+            staticClass: "col-lg-3 col-sm-3 col-xs-3",
+            attrs: { ":key": federacao.id }
+          },
           [
             _c("div", { staticClass: "card card-primary" }, [
               _c("div", { staticClass: "card-header" }, [

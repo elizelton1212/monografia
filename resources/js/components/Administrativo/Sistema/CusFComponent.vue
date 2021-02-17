@@ -23,7 +23,7 @@
 
                     </select>
                     <br><hr>
-                    <center><button type='submit' class='btn btn-success'>Registar</button><button type='reset' class='btn btn-danger'>Limpar</button></center>
+                    <center><button type='submit' class='btn btn-success'>Registar</button><button type='reset' class='btn btn-danger'>LimparN</button></center>
 
 
                     </form>
@@ -72,6 +72,7 @@
             data.append('imagem',this.imagem);
             data.append('funcao',this.funcao);
             data.append('federacao',this.federacao);
+            data.append('password',this.password);
 
 
 

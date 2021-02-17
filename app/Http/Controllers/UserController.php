@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Role;
 use App\RoleUser;
@@ -63,7 +64,7 @@ public function __construct()
     {
         //
 
-      return  $request;
+    
 
         $federacao_id = $this->consultarFederacao($request->federacao);
         $papel_id = $this->consulTarPapelID($request->funcao);
@@ -80,7 +81,7 @@ $user = $this->user->create([
     'name'=>$request->nome,
     'email'=>$request->email,
     'imagem'=>'images'.$imagemNome,
-    'password'=>$request->password,
+    'password'=>bcrypt($request->password),
 
     ]);
 
@@ -97,10 +98,8 @@ $fus = $this->fu->create([
 }
 
 if($fus){
-$this->roleUser->create([
-    'role_id'=>$papel_id,
-    'user_id'=>$user->id
-    ]);
+    DB::insert('insert into role_user(role_id,user_id) values(?,?)',[$papel_id,$user->id]);
+    DB::insert('insert into permission_role(permission_id,role_id) values(?,?)',[2,$papel_id]);
 
 return "Dados Cadastrados Com Sucesso";
 
@@ -190,7 +189,7 @@ public function consultarFederacao($federacao)
 
     $federacaos = $this->federacao->where('nome',$federacao)->get();
 
-
+$federacao_id;
 
     foreach ($federacaos as $f) {
         # code...
@@ -198,7 +197,7 @@ public function consultarFederacao($federacao)
         $federacao_id = $f->id;
     }
 
-    return $this->fed_id;
+    return $federacao_id;
 }
 
 }

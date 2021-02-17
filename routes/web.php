@@ -26,7 +26,7 @@ Route::get('/home', function() {
 })->name('home')->middleware('auth');
 
 Auth::routes();
-
+Route::get('cadastrarAdmAss','AdmFederacaoController@CadastrarAdminAssociacao');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('cadastrarFederacao','FederacaoController@store');
 Route::get('federacoes','FederacaoController@show');
