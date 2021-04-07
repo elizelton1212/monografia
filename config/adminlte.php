@@ -64,12 +64,12 @@ return [
     |
     */
 
-    'usermenu_enabled' => false,
-    'usermenu_header' => true,
-    'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
-    'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
+    'usermenu_enabled' => true,
+    'usermenu_header' => false,
+    'usermenu_header_class' => 'dropdown-menu dropdown-menu-lg dropdown-menu-right',
+    'usermenu_image' => true,
+    'usermenu_desc' => true,
+    'usermenu_profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -102,7 +102,7 @@ return [
     */
 
     'classes_auth_card' => 'card-outline card-primary',
-    'classes_auth_header' => 'true',
+    'classes_auth_header' => 'btn-flat btn-primary',
     'classes_auth_body' => '',
     'classes_auth_footer' => '',
     'classes_auth_icon' => '',
@@ -236,7 +236,7 @@ return [
             'icon'    => 'fas fa-university',
             'submenu' => [
                   
-             [
+                 [
                     'text' => 'Cadastrar Adm Associacao',
                     'can' => 'Administrar_a_Federacao',
                     'icon' =>'fas fa-cog',
@@ -247,6 +247,12 @@ return [
                     'text' => 'Cadastrar',
                     'icon' =>'fas fa-plus',
                     'url'  => 'cadastrarApa',
+                ],
+               [
+                    'text' => 'Consultar Associações',
+                    'icon' =>'fas fa-search',
+                    'can'  =>'administrador_de_Sistema',
+                    'url'  => 'consultarAssociac',
                 ],
                
                 
@@ -270,6 +276,35 @@ return [
                 
             ],
         ],
+
+          [
+            'text'    => 'Clubes',
+            'icon'    => 'fas fa-flag',
+            'submenu' => [
+                  
+                 [
+                    'text' => 'Cadastrar Clube',
+                    'can' => '',
+                    'icon' =>'fas fa-cog',
+                    'url'  => 'cadastrarClube',
+                ],
+                
+
+                  [
+                    'text' => 'Consultar Clube',
+                    'can' => '',
+                    'icon' =>'fas fa-search',
+                    'url'  => 'consultarClube',
+                ],
+
+                
+
+
+
+                
+            ],
+        ],
+      
       
         [
             'text'    => 'Concelho Disciplinar',
@@ -354,9 +389,9 @@ return [
         
         
 
-        [
+     /*   [
             'text'    => 'Federações',
-            'icon'    => '',
+            'icon'    => 'fas fa-filter',
             'submenu' => [
                 [
                     'text' => 'Cadastrar Federação',
@@ -370,7 +405,7 @@ return [
                 ],
                 
             ],
-        ],
+        ], */
         
         [
             'text'  =>'Administrativo',

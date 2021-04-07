@@ -8,18 +8,33 @@ use App\Models\Municipio;
 use App\Models\Provincia;
 use App\Models\Apa;
 use App\Models\Localizacao;
+use App\Models\Districto;
+use App\Models\Federacao;
+use App\Models\Comuna;
+use Illuminate\Support\Facades\DB;
+
+
 class ApaController extends Controller
 {
     //
 
     private $municipio;
     private $provincia;
+    private $apa;
+    private $l;
+    private $districto;
+    private $federacao;
+    private $comuna;
+   
 
  public function __construct(){
-
+   $this->federacao = new Federacao();
    $this->municipio= new Municipio();
    $this->provincia= new Provincia();
-
+   $this->l=new Localizacao();
+   $this->apa=new Apa();
+   $this->districto = new Districto();
+   $this->comuna = new Comuna();
     }
 
 public function index(){
@@ -122,6 +137,8 @@ public function storeApa(Request $request)
     {
     	# code...
 
+
+
     	$localizacao['provincia'] = $request->provincia;
     	$localizacao['municipio'] = $request->municipio;
     	$localizacao['districto'] = $request->districto;
@@ -132,6 +149,7 @@ public function storeApa(Request $request)
     	$localizacao_id = $this->store($localizacao);
 
 
+$federacaoId = $this->ConsultarFederacaoID($request->federacao);
 
 
 
@@ -142,7 +160,8 @@ public function storeApa(Request $request)
 		'telefone'=>$request->telefone,
 		'facebook'=>$request->facebook,
 		'responsavel'=>$request->responsavel,
-		'localizacao_id'=>$localizacao_id
+		'localizacao_id'=>$localizacao_id,
+        'federacao_id'=>13,
 
     		]);
 
@@ -254,5 +273,77 @@ $districtos = $this->municipio->find($t)->MunicipioDistricto;
 
 }
 
+public function ConsultarFederacaoID($federacao)
+{
+    # code...
+
+
+    $fd = $this->federacao->where('nome',$federacao)->get();
+
+foreach ($fd as $value) {
+    
+
+    $x = $value->id;
+
+return $x;
+
+}
+
+
+
+}
+
+public function ConsultarAssociacoes()
+{
+    
+ /*   $papel = DB::select('SELECT  f.nome Federacao,a.nome Associacao,p.nome Provincia,a.id Associacao_id FROM 
+     provincias p, apas a,localizacaos l,federacaos f WHERE 
+     a.federacao_id=f.id and l.id=a.localizacao_id and l.provincia_id=p.id');
+*/
+$federacaos = $this->federacao->all();
+
+return response()->json($federacaos);
+
+
+
+}
+
+public function Consultar()
+{
+    # code...
+    return view('apa.consulta');
+}
+public function Associacoes($id)
+{
+    # code...
+  
+$fed = $this->federacao->find($id)->FederacaoApa;
+
+return response()->json($fed);
+
+}
+
+public function Pa($id)
+{
+    # code...
+
+
+    $pa  = $this->apa->find($id);
+
+    $loca=$this->l->find($pa->localizacao_id);
+    //dd($loca);
+
+    $provincias =$this->provincia->find($loca->provincia_id) ;
+
+    $municipios =$this->municipio->find($loca->municipio_id);
+
+    $districtos=$this->districto->find($loca->districto_id);
+
+    $comunas =$this->comuna->find($loca->comuna_id);
+    
+    return view ('apa.consulta2',compact('pa','loca','comunas','provincias','municipios','districtos'));
+
+
+}
 
 }

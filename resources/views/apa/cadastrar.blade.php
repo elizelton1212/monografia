@@ -4,7 +4,7 @@
 
 @section('content')
 <div id='app'>
-<ca-component></ca-component>
+<caca-component></ca-component>
 
 </div>
 @stop

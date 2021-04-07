@@ -15,8 +15,30 @@ class Apa extends Model
 		'telefone',
 		'facebook',
 		'responsavel',
-		'localizacao_id'
+		'localizacao_id',
+		'federacao_id',
 
 
     ];
+
+
+
+    public function Federacao()
+    {
+    	# code...
+
+    	return $this->belongsTo('App\Models\Federacao');
+    }
+
+    public function Localizacao()
+    {
+    return $this->hasOne('App\Models\Localizacao');
+    }
+
+    public function Clubes($value='')
+    {
+        # code...
+
+        return $this->hasMany('App\Models\Clube');
+    }
 }

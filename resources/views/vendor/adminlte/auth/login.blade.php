@@ -14,7 +14,7 @@
     @php( $password_reset_url = $password_reset_url ? route($password_reset_url) : '' )
 @else
     @php( $login_url = $login_url ? url($login_url) : '' )
-    @php( $register_url = $register_url ? url($register_url) : '' )
+    
     @php( $password_reset_url = $password_reset_url ? url($password_reset_url) : '' )
 @endif
 
@@ -85,12 +85,5 @@
         </p>
     @endif
 
-    {{-- Register link --}}
-    @if($register_url)
-        <p class="my-0">
-            <a href="{{ $register_url }}">
-                {{ __('adminlte::adminlte.register_a_new_membership') }}
-            </a>
-        </p>
-    @endif
+    
 @stop

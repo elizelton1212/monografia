@@ -3,9 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Apa;
+use App\User;
+use App\Models\UserAssociacao;
 
 class AdmFederacaoController extends Controller
 {
+
+private $associacao;
+private $user;
+private $ua;
+    public function __construct()
+    {
+        $this->associacao= new Apa();
+        $this->user = new User();
+        $this->ua = new UserAssociacao();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -32,9 +46,64 @@ class AdmFederacaoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+public function consultarassociacaoid($federacao)
+{
+    # code...
+
+
+    $federacaos = $this->associacao->where('nome',$federacao)->get();
+
+$federacao_id;
+
+    foreach ($federacaos as $f) {
+        # code...
+
+        $federacao_id = $f->id;
+    }
+
+    return $federacao_id;
+}
+
+
     public function store(Request $request)
     {
         //
+    
+
+$imagem= request()->file('imagem');
+
+
+$imagemNome=$imagem->getClientOriginalName();
+$imagemNome=time().'_'.$imagemNome;
+$imagem->move(public_path('/images'),$imagemNome);
+
+
+
+    $user = $this->user->create([
+    'name'=>$request->nome,
+    'email'=>$request->email,
+    'imagem'=>'images'.$imagemNome,
+    'password'=>bcrypt($request->password),
+
+    ]);
+ if ($user){
+    $papel = DB::insert('insert into role_user (user_id,role_id) values(?,?)',[$user->id,3]);
+    $associacaos_id =$this->consultarassociacaoid($request->federacao);
+    $this->ua->create([
+            'user_id'=>$user->id,
+            'associacaos_id'=>$associacaos_id
+        ]); 
+    return "Dados cadastrados com sucesso";
+
+ }else{
+
+    return  "Erro ao cadstrar os dados";
+ }
+
+
+
+
     }
 
     /**
@@ -82,6 +151,15 @@ class AdmFederacaoController extends Controller
         //
     }
 
+
+    public function consultarAssociacoes()
+    {
+        $retorno = $this->associacao->all();
+
+        return response()->json($retorno); 
+
+    }
+
     public function CadastrarAdminAssociacao()
     {
         # code...
@@ -89,4 +167,6 @@ class AdmFederacaoController extends Controller
 
         return view('Administrativo.Federacao.CadastrarAdmAssociacao');
     }
+
+
 }

@@ -19,7 +19,7 @@ class CreateUserAssociacaosTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade'); 
             
             $table->bigInteger('associacaos_id')->unsigned();
-            $table->foreign('associacaos_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('associacaos_id')->references('id')->on('apas')->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();
         });

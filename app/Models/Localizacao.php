@@ -20,4 +20,33 @@ protected $fillable = [
 ];
 
 
+public function Provincia()
+{
+	return $this->hasOne('App\Models\Provincia');
+}
+
+public function Municipio()
+{
+	return $this->hasOne('App\Models\Municipio');
+}
+
+ public function Districto()
+{
+
+
+	return $this->hasOne('App\Models\Districto');
+}
+
+public function Comuna()
+{
+	# code...
+
+	return $this->hasOne('App\Models\Comuna');
+}
+
+public function apa($value='')
+{
+	return hasOne('App\Models\Apa');
+}
+
 }

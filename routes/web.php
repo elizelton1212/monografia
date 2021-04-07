@@ -13,15 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('teste','teste@index');
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
 
 Auth::routes();
 
-Route::get('/home', function() {
+Route::get('/', function() {
     return view('home');
 })->name('home')->middleware('auth');
 
@@ -48,10 +45,16 @@ Route::resource('CadastrarUser','UserController');
 Route::any('ConsultarFederacao2','FederacaoController@consultarFederacao2');
 Route::post('cadastrarUser','UserController@store');
 Route::any('consultarPapeis','UserController@consultarPapel');
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::any('consultarAssociacoes','AdmFederacaoController@consultarAssociacoes');
+Route::any('cadastrarAdma','AdmFederacaoController@store');
+Route::any('consultarAssociac','ApaController@Consultar');
+Route::any('consultarA','ApaController@ConsultarAssociacoes');
+Route::any('consultaAsso/{id}','ApaController@Associacoes');
+Route::any('pesquisaAsso/{id}','ApaController@Pa');
+Route::get('cadastrarClube','ClubeController@index');
+Route::any('clubeConsultaAssociacao','ClubeController@Associacoes');
+Route::any('cadastrarClube1','ClubeController@store');
+Route::any('verAdm','FederacaoController@verAdm');
+Route::any('consultarClube','ClubeController@show');
+Route::any('consultarClubesAuth','ClubeController@consultarClubes');
+Route::any('ConsultarProvinciasID','ClubeController@ConsultarProvinciasID');

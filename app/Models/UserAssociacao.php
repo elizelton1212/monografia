@@ -9,7 +9,7 @@ class UserAssociacao extends Model
     //
 	protected $fillable = [
 		'user_id',
-		'associacao_id'
+		'associacaos_id'
 
 	];
 

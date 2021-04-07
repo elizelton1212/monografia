@@ -47,12 +47,10 @@
          <option value v-for='(comunas) in comunas' ::key="comunas.id">{{comunas.nome}}</option>
          </select>
 
-         <lable>Bairro</lable>
-
          <input type="text" class="form-control-range" v-model='bairro' id='bairro' placeholder="Bairro">
          <input type="text"  required v-model='rua' id='rua' placeholder="Rua">
          <input type="text"  required v-model='ncasa' id='responsavel' placeholder="Nº Casa">
-         <input type='text'  v-model='retorno'>
+         <strong  v-if='retorno'></strong>
         
         <br>
         <br>
@@ -73,8 +71,10 @@
     export default {
 data() {
             return {
+                federacao:'',
                 localizacoes:'',
                 localizacao:'',
+                federacaos:'',
                 retornoLocalizacao:'',
                 provincias:'',
                 municipios:'',
@@ -103,6 +103,8 @@ data() {
             this.link2();
             this.link3();
             this.link4();
+            this.link5();
+
         },
 
         methods:{
@@ -158,13 +160,13 @@ getResults(){
                 responsavel:this.responsavel,
                 localizacao:this.retornoLocalizacao,
                 provincia:this.provincia,
-                  municipio:this.municipio,
-                  districto:this.districto,
-                  comuna:this.comuna,
-                  bairro:this.bairro,
-                  rua:this.rua,
-                  ncasa:this.ncasa
-
+                municipio:this.municipio,
+                districto:this.districto,
+                comuna:this.comuna,
+                bairro:this.bairro,
+                rua:this.rua,
+                ncasa:this.ncasa,
+                federacao:this.federacao
 
 
 
@@ -184,12 +186,21 @@ getResults(){
                 this.facebook='';
                 this.responsavel='';
                 this.localizacao='';
+                this.federacao='';
                 this.retornoLocalizacao='';
                 this.retorno=response.data;
 
 
+
               });
             
+          },
+          link5(){
+          axios.post('ConsultarFederacao2').then(response=>{
+        console.log(response.data)
+        this.federacaos=response.data;
+        });
+
           },
 
         },

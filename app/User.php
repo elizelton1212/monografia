@@ -5,9 +5,16 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Apa;
+Use App\Models\UserAssociacao;
+Use App\Models\Localizacao;
+Use App\Models\Provincia;
+
 
 class User extends Authenticatable
 {
+
+    private $t;
     use Notifiable;
 
     /**
@@ -56,5 +63,42 @@ class User extends Authenticatable
            return !! $roles->intersect($this->role)->count();
             }
             return $this->role->contains('name', $roles);
+    }
+
+
+    public function adminlte_image()
+    {
+        # code...
+
+        return auth()->user()->imagem;
+    }
+
+
+    public function adminlte_profile_url()
+    {
+        # code...
+    }
+
+    public function adminlte_desc()
+    {
+        return auth()->user()->email;
+    }
+
+    public function apa()
+    {
+        $r = UserAssociacao::where('user_id',auth()->user()->id)->get();   
+        foreach ($r as $value) {
+            # code...
+
+            $this->t = $value->associacaos_id;
+        }
+ $apa = Apa::find($this->t);
+
+        $localizacao = $apa->localizacao_id;
+
+        $id_provincia= Localizacao::find($localizacao)->provincia_id;
+        $provincia= Provincia::find($id_provincia);
+
+        return $provincia->nome;
     }
 }

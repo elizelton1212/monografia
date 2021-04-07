@@ -10,22 +10,22 @@
                     <input type='text' class='form-control' v-model='nome' placeholder='Nome Completo' required>
                      <input type='email' v-model='email' id='email' required class='form-control' placeholder ='Email'>
                     <input type='password' v-model='password' id='password' required class='form-control' placeholder ='Palavra Pass'>
-                    <Lable>Imagem</lable>
+                    Imagem
                     <input type='file' @change='imagemSelecionada'>
                    <br>
-                    <lable>Federacao</lable>
+                    Federacao
                     <select  v-model='federacao'>
                     <option  v-for='(federacaos) in federacaos' ::key="federacaos.id">{{federacaos.nome}}</option>
                     </select>
-                    <lable>Função</lable>
+                    Função
                     <select v-model='funcao' >
                     <option v-for='(roles) in roles' ::key="roles.id">{{roles.name}}</option>
 
                     </select>
                     <br><hr>
-                    <center><button type='submit' class='btn btn-success'>Registar</button><button type='reset' class='btn btn-danger'>LimparN</button></center>
+                    <center><button type='submit' class='btn btn-success'>Registar</button><button type='reset' class='btn btn-danger'>Limpar</button></center>
 
-
+                    <strong v-if='retornoCadastro'></strong>
                     </form>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
 
 
 
-            axios.post('cadastrarUser',data).the(response=>{
+            axios.post('cadastrarUser',data).then(response=>{
             this.retornoCadastro = response.data;
 
         });

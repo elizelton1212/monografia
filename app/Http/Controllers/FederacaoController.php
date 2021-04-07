@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Federacao;
 use Illuminate\Http\Request;
+use Gate;
 
 class FederacaoController extends Controller
 {
@@ -93,6 +94,10 @@ if($insert){
     public function show()
     {
         //
+
+
+        //abort(403,'Nao tem autorizacao para alterar isto');
+
         $federacoes = $this->federacao->paginate(20);
 
         return response()->json($federacoes);
@@ -174,5 +179,23 @@ if($insert){
            $fed = $this->federacao->all();
         return response()->json($fed);
 
+    }
+
+
+
+    public function verAdm()
+    {
+if(Gate::denies('administrador_de_sistema')){
+
+
+    $retorno= false;
+
+}else{
+
+    $retorno= true;
+}
+
+
+return response()->json($retorno);        
     }
 }

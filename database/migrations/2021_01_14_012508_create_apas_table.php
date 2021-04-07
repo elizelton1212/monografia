@@ -22,6 +22,9 @@ class CreateApasTable extends Migration
             $table->string('responsavel');
             $table->bigInteger('localizacao_id')->unsigned();
             $table->foreign('localizacao_id')->references('id')->on('localizacaos')->onDelete('cascade')->onUpdate('cascade');
+            $table->bigInteger('localizacao_id')->unsigned();
+            $table->foreign('federacao_id')->references('id')->on('federacaos')->onDelete('cascade')->onUpdate('cascade');
+
             $table->timestamps();
         });
     }

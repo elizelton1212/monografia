@@ -6,11 +6,11 @@
 
         {{-- Icon (optional) --}}
         @if(isset($item['icon']))
+
             <i class="{{ $item['icon'] ?? '' }} {{
                 isset($item['icon_color']) ? 'text-' . $item['icon_color'] : ''
             }}"></i>
         @endif
-
         {{-- Text --}}
         {{ $item['text'] }}
 

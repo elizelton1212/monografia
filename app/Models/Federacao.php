@@ -16,4 +16,13 @@ class Federacao extends Model
         'email',
         'imagem'
             ];
+
+
+
+            public function FederacaoApa()
+            {
+            	# code...
+            	return $this->hasMany('App\Models\Apa');
+
+            }
 }

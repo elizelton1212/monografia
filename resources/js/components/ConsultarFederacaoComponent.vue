@@ -16,9 +16,10 @@
                         <hr>
 
 <button class='btn btn-primary small' data-toggle='modal' @click='link(federacao.id)' data-target='#ver'><i class='fas fa-eye'></i></button>
-                <button class='btn btn-success small' data-toggle='modal' @click='link(federacao.id)' data-target='#edit'><i class='fas fa-edit'></i></button>
-                <button class='btn btn-danger small' @click='deletFederacao(federacao.id)'><i class='fas fa-trash'></i></button>
-
+                <button v-if='estado' class='btn btn-success small' data-toggle='modal' @click='link(federacao.id)' data-target='#edit'><i class='fas fa-edit'></i></button>
+                
+                <button v-if='estado' class='btn btn-danger small' @click='deletFederacao(federacao.id)'><i class='fas fa-trash'></i></button>
+                
                         </div>
 
 
@@ -114,7 +115,8 @@
                 editarpresidente:'',
                 editartelefone:'',
                 editaremail:'',
-                verid:''
+                verid:'',
+                estado:''
     }
 
     },
@@ -124,6 +126,7 @@
         mounted() {
             console.log('Component mounted.');
             this.getResults();
+            this.verAdm();
         },
 
         methods:{
@@ -181,7 +184,17 @@
 
 
               })
-          }
+          },
+
+          verAdm(){
+          axios.get('verAdm').then(response=>{
+
+          this.estado=response.data;
+
+
+
+          });
+          },
 
         },
     }

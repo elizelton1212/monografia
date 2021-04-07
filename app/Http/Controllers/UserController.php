@@ -63,11 +63,8 @@ public function __construct()
     public function store(Request $request)
     {
         //
-
-    
-
-        $federacao_id = $this->consultarFederacao($request->federacao);
-        $papel_id = $this->consulTarPapelID($request->funcao);
+$federacao_id = $this->consultarFederacao($request->federacao);
+$papel_id = $this->consulTarPapelID($request->funcao);
 
 $imagem= request()->file('imagem');
 
@@ -75,12 +72,10 @@ $imagem= request()->file('imagem');
 $imagemNome=$imagem->getClientOriginalName();
 $imagemNome=time().'_'.$imagemNome;
 $imagem->move(public_path('/images'),$imagemNome);
-
-
 $user = $this->user->create([
     'name'=>$request->nome,
     'email'=>$request->email,
-    'imagem'=>'images'.$imagemNome,
+    'imagem'=>'images/'.$imagemNome,
     'password'=>bcrypt($request->password),
 
     ]);
@@ -91,10 +86,6 @@ $fus = $this->fu->create([
     'user_id'=>$user->id,
     'federacao_id'=>$federacao_id
     ]);
-
-
-
-
 }
 
 if($fus){
@@ -104,12 +95,9 @@ if($fus){
 return "Dados Cadastrados Com Sucesso";
 
 }else{
-
-
     return "Erro ao Cadastrar Dados";
 }
-
-    }
+}
 
     /**
      * Display the specified resource.
@@ -185,8 +173,6 @@ $papel_id;
 public function consultarFederacao($federacao)
 {
     # code...
-
-
     $federacaos = $this->federacao->where('nome',$federacao)->get();
 
 $federacao_id;
@@ -198,6 +184,12 @@ $federacao_id;
     }
 
     return $federacao_id;
+}
+
+public function CadastrarUserFederacao(Request $request)
+{
+    
+    
 }
 
 }
