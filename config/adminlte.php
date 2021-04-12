@@ -407,6 +407,24 @@ return [
             ],
         ], */
         
+            [
+            'text'    => 'Atletas',
+            'icon'    => 'fas fa-filter',
+            'submenu' => [
+                [
+                    'text' => 'Cadastrar Atleta',
+                    'can'  =>  'administrador_de_Sistema',
+                    'url'  => 'CadastrarAtleta',
+                ],
+                
+                [
+                    'text' => 'Consultar Consultar Atleta',
+                    'url'  => '#',
+                ],
+                
+            ],
+        ], 
+        
         [
             'text'  =>'Administrativo',
             'icon'  =>'fas fa-cog',

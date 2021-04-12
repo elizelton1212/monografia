@@ -58,3 +58,4 @@ Route::any('verAdm','FederacaoController@verAdm');
 Route::any('consultarClube','ClubeController@show');
 Route::any('consultarClubesAuth','ClubeController@consultarClubes');
 Route::any('ConsultarProvinciasID','ClubeController@ConsultarProvinciasID');
+Route::any('CadastrarAtleta','JogadorController@index');
